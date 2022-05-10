@@ -9,9 +9,7 @@ const fieldCharacter = "░";
 const pathCharacter = "*";
 const row = 10;
 const col = 10;
-
 const getRow2 = Math.floor(Math.random() * row);
-
 const getCol2 = Math.floor(Math.random() * col);
 const rand = Math.floor(Math.random() * (row * col * 0.5));
 let temporaryX = 0;
