@@ -13,7 +13,9 @@ const col = 10;
 const getRow2 = Math.floor(Math.random() * row);
 
 const getCol2 = Math.floor(Math.random() * col);
-const rand = Math.floor(Math.random() * (row * col));
+const rand = Math.floor(Math.random() * (row * col * 0.5));
+let temporaryX = 0;
+let temporaryY = 0;
 
 //We are using class object in this example
 
@@ -44,7 +46,7 @@ class Field {
       }
     }
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < rand; i++) {
       const getRow = Math.floor(Math.random() * row);
       const getCol = Math.floor(Math.random() * col);
 
@@ -70,15 +72,17 @@ class Field {
         console.log("Sorry you fell down a hole");
         isGameOver = true;
       } else if (
-        this.locationX < 0 &&
-        this.locationY < 0 &&
-        this.locationX > this.field.length &&
-        this.locationY > this.field[0].length
+        this.locationX < 0 ||
+        this.locationY < 0 ||
+        this.locationX > row - 1 ||
+        this.locationY > col - 1
       ) {
         console.log("Sorry you went out of bounds");
         isGameOver = true;
       }
+
       this.field[this.locationX][this.locationY] = pathCharacter;
+      this.field[temporaryX][temporaryY] = fieldCharacter;
     }
   }
 
@@ -94,6 +98,8 @@ class Field {
 
   askQuestion() {
     const answer = prompt("Which way? ").toUpperCase();
+    temporaryX = this.locationX;
+    temporaryY = this.locationY;
     switch (answer) {
       case "U":
         console.log("Moving up");
@@ -120,8 +126,6 @@ class Field {
         this.askQuestion();
         break;
     }
-
-    //Implement your code
   }
 } //End of field class
 
